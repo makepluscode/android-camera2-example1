@@ -278,6 +278,14 @@ public class Camera extends Thread {
                             public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
                                 Log.d(TAG, "onCaptureCompleted");
                                 super.onCaptureCompleted(session, request, result);
+
+                                final Handler delayPreview = new Handler();
+                                delayPreview.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        startPreview(); // Call the startPreview method
+                                    }
+                                }, 500); // Delayed by 1000 milliseconds (1 second)
                             }
                         }, backgroundHandler);
                     } catch (CameraAccessException e) {
